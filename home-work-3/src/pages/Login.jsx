@@ -1,26 +1,28 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import InputField from "../components/InputField";
 import { Link, useNavigate } from "react-router-dom";
 import { userNameValidList, passwordValidList } from "../utils/validationLists";
 import { load_user_session } from "../utils/loadUserSesion";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { Context } from "../App";
 
 export default function Login() {
-  const navigate = useNavigate();
-  const [user, setUser] = useState({
+  const [loginUserObj, setLoginUserObj] = useContext(Context);
+  let user = {
     username: "",
     password: "",
-  });
+  };
+
   function onChange(e) {
-    setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    user = { ...user, [e.target.name]: e.target.value };
   }
   function loginUser(e) {
     e.preventDefault();
     try {
       const data = new FormData(e.target);
-      load_user_session(Object.fromEntries(data.entries()));
-      navigate("/profile");
+      const userDetails = Object.fromEntries(data.entries());
+      setLoginUserObj(load_user_session(userDetails));
     } catch (error) {
       withReactContent(Swal).fire({
         title: "Try again",
@@ -68,9 +70,6 @@ export default function Login() {
           <InputField key={input.id} {...input} onChange={onChange} />
         ))}
         <button>submit</button>
-        <p>
-          you don't have an account? <Link to="/register">sing up</Link>
-        </p>
       </form>
     </>
   );

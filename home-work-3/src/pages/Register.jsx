@@ -19,9 +19,6 @@ function Register() {
     phone: "",
   });
 
-  // just for testing
-  const [image, setImage] = useState("");
-
   function onChange(e) {
     setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
@@ -30,7 +27,9 @@ function Register() {
   function handleSubmit(e) {
     e.preventDefault();
     const data = new FormData(e.target);
-    add_user_to_local_storage(Object.fromEntries(data.entries()));
+    const adjusted_data = Object.fromEntries(data.entries());
+    adjusted_data.userImage = URL.createObjectURL(adjusted_data.userImage);
+    add_user_to_local_storage(adjusted_data);
     e.target.reset();
     let formInputs = e.target.elements;
     for (let input of formInputs) {
@@ -155,9 +154,6 @@ function Register() {
           <InputField key={input.id} {...input} onChange={onChange} />
         ))}
         <button>submit</button>
-        <p>
-          I have an account <Link to="/">Login</Link>
-        </p>
       </form>
     </>
   );

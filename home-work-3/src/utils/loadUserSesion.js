@@ -6,6 +6,7 @@ export function load_user_session(current_user) {
         })
         if (userDetails && userDetails.password == current_user.password) {
             sessionStorage.setItem("user", JSON.stringify(userDetails));
+            return userDetails;
         }
         else {
             throw new Error('something went wrong check your username and password')
