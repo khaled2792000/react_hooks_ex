@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import InputField from "../components/InputField";
 import * as validList from "../utils/validationLists.js";
 import { add_user_to_local_storage } from "../utils/addUserToLocalSorage.js";
+import { Link } from "react-router-dom";
 
 function Register() {
   const [user, setUser] = useState({
@@ -149,11 +150,14 @@ function Register() {
   return (
     <>
       <form action="" onSubmit={handleSubmit}>
+        <h1>Sing up</h1>
         {inputs.map((input) => (
           <InputField key={input.id} {...input} onChange={onChange} />
         ))}
         <button>submit</button>
-        <img src={image} alt="" />
+        <p>
+          I have an account <Link to="/">Login</Link>
+        </p>
       </form>
     </>
   );

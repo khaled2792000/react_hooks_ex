@@ -4,5 +4,5 @@ export function add_user_to_local_storage(newUser) {
         localStorage.setItem('users', JSON.stringify([...usersList, newUser]))
         return;
     }
-    localStorage.setItem('users', [JSON.stringify(newUser)])
+    localStorage.setItem('users', JSON.stringify([newUser]))
 }
