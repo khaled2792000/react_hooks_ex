@@ -6,8 +6,6 @@ import { Context } from "../../App";
 export default function Editdetails() {
   const [user, setUser] = useContext(Context);
 
-  // just for testing
-
   function onChange(e) {
     setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
@@ -95,16 +93,6 @@ export default function Editdetails() {
       pattern: `^[A-Za-z]+$`,
       label: "Last name",
       value: user.lastName,
-      required: true,
-    },
-    {
-      id: 7,
-      name: "email",
-      type: "email",
-      placeholder: "Email",
-      validationList: validList.emailValidList,
-      label: "Email",
-      value: user.email,
       required: true,
     },
     {
