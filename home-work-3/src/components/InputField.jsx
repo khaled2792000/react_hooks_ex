@@ -34,7 +34,7 @@ export default function InputField(props) {
             {validList.map((elm) => (
               <li
                 key={elm.errorMessage}
-                style={{ color: elm.valid ? "black" : "red" }}
+                style={{ color: elm.valid ? "green" : "red" }}
               >
                 {elm.errorMessage}
               </li>

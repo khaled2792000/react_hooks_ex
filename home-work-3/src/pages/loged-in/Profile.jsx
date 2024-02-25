@@ -4,6 +4,7 @@ import SystemAdmin from "./SystemAdmin";
 export default function Profile() {
   const [user, setUser] = useContext(Context);
   const [show, setShow] = useContext(ProfileContext);
+  const userLogedIn = JSON.parse(sessionStorage.getItem("user"));
   const showDetailsPage = () => {
     {
       user && setShow((prev) => !prev);
@@ -15,30 +16,27 @@ export default function Profile() {
   };
   return (
     <>
-      {user && (
+      {userLogedIn && (
         <>
-          {user.type != "admin" && (
+          {userLogedIn.type != "admin" && (
             <div className="profile-area">
               <div className="profile-image" style={{ gridArea: "image" }}>
                 <img
-                  src={user.userImage}
+                  src={userLogedIn.userImage}
                   alt=""
-                  onError={() => {
-                    setUser((prev) => ({
-                      ...prev,
-                      userImage:
-                        "https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortFlat&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light",
-                    }));
+                  onError={(e) => {
+                    e.target.src =
+                      "https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortFlat&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light";
                   }}
                 />
               </div>
               <div style={{ gridArea: "text" }}>
-                <h2>{user.username}</h2>
-                <h3>{user.email}</h3>
+                <h2>{userLogedIn.username}</h2>
+                <h3>{userLogedIn.email}</h3>
                 <h3>
-                  {user.roadName}, {user.city}
+                  {userLogedIn.roadName}, {user.city}
                 </h3>
-                <h3>{user.birthday}</h3>
+                <h3>{userLogedIn.birthday}</h3>
               </div>
               <div style={{ gridArea: "button" }} className="buttons">
                 <button onClick={showDetailsPage}>update profile</button>
@@ -49,7 +47,7 @@ export default function Profile() {
               </div>
             </div>
           )}
-          {user.type == "admin" && <SystemAdmin />}
+          {userLogedIn.type == "admin" && <SystemAdmin />}
         </>
       )}
     </>

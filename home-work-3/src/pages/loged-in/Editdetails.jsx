@@ -8,6 +8,7 @@ export default function Editdetails() {
   const [user, setUser] = useContext(Context);
   // if the user logout in the middle of the edit
   if (user == null) return;
+
   function onChange(e) {
     setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
@@ -28,11 +29,6 @@ export default function Editdetails() {
         input.dispatchEvent(event);
       }
     }
-    // the load phono methods
-    // setImage(URL.createObjectURL(Object.fromEntries(data.entries()).userImage));
-    // console.log(
-    //   URL.createObjectURL(Object.fromEntries(data.entries()).userImage)
-    // );
   }
   const inputs = [
     {

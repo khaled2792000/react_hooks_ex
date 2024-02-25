@@ -12,16 +12,19 @@ function App() {
   const [loginUser, setLoginUser] = useState(null);
   const [show, setShow] = useState(false);
   useEffect(() => {
-    localStorage.setItem(
-      "users",
-      JSON.stringify([
-        {
-          type: "admin",
-          username: "admin",
-          password: "ad12343211ad",
-        },
-      ])
-    );
+    sessionStorage.clear();
+    const users = JSON.parse(localStorage.getItem("users"));
+    users ??
+      localStorage.setItem(
+        "users",
+        JSON.stringify([
+          {
+            type: "admin",
+            username: "admin",
+            password: "ad12343211ad",
+          },
+        ])
+      );
   }, []);
   return (
     <>

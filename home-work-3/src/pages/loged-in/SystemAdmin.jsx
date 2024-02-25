@@ -1,7 +1,10 @@
 import React, { useContext, useState } from "react";
-import { Context } from "../../App";
+import { Context, ProfileContext } from "../../App";
 
 export default function SystemAdmin() {
+  const [userToEdit, setUserToEdit] = useContext(Context);
+  const [show, setShow] = useContext(ProfileContext);
+
   const [users, setUsers] = useState(
     JSON.parse(localStorage.getItem("users")).filter(
       (user) => user.username != "admin"
@@ -33,12 +36,9 @@ export default function SystemAdmin() {
                     <img
                       src={user.userImage}
                       alt=""
-                      onError={() => {
-                        setUser((prev) => ({
-                          ...prev,
-                          userImage:
-                            "https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortFlat&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light",
-                        }));
+                      onError={(e) => {
+                        e.target.src =
+                          "https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortFlat&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light";
                       }}
                     />
                     <p>{user.username}</p>
@@ -48,11 +48,18 @@ export default function SystemAdmin() {
                   </td>
                   <td>{user.birthday}</td>
                   <td>
-                    {user.roadName} {user.phone}, {user.city}
+                    {user.roadName} {user.houseNumber}, {user.city}
                   </td>
                   <td>{user.email}</td>
                   <td>
-                    <button onClick={() => console.log("yes")}>edit</button>
+                    <button
+                      onClick={() => {
+                        setShow((prev) => !prev);
+                        setUserToEdit(user);
+                      }}
+                    >
+                      edit
+                    </button>
                     <button></button>
                   </td>
                 </tr>
