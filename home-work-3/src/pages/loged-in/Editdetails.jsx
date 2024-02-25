@@ -2,10 +2,12 @@ import React, { useContext, useState } from "react";
 import InputField from "../../components/InputField";
 import * as validList from "../../utils/validationLists.js";
 import { Context } from "../../App";
+import { update_user } from "../../utils/addUserToLocalSorage.js";
 
 export default function Editdetails() {
   const [user, setUser] = useContext(Context);
-
+  // if the user logout in the middle of the edit
+  if (user == null) return;
   function onChange(e) {
     setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
@@ -16,7 +18,8 @@ export default function Editdetails() {
     const data = new FormData(e.target);
     const adjusted_data = Object.fromEntries(data.entries());
     adjusted_data.userImage = URL.createObjectURL(adjusted_data.userImage);
-    add_user_to_local_storage(adjusted_data);
+    adjusted_data.email = user.email;
+    update_user(adjusted_data);
     e.target.reset();
     let formInputs = e.target.elements;
     for (let input of formInputs) {
@@ -135,13 +138,15 @@ export default function Editdetails() {
   ];
   return (
     <>
-      <form action="" onSubmit={handleSubmit}>
-        <h1>Sing up</h1>
-        {inputs.map((input) => (
-          <InputField key={input.id} {...input} onChange={onChange} />
-        ))}
-        <button>submit</button>
-      </form>
+      {user && (
+        <form action="" onSubmit={handleSubmit} className="edit-area">
+          <h1 style={{ gridArea: "title" }}>Edit user info</h1>
+          {inputs.map((input) => (
+            <InputField key={input.id} {...input} onChange={onChange} />
+          ))}
+          <button style={{ gridArea: "button" }}>submit</button>
+        </form>
+      )}
     </>
   );
 }

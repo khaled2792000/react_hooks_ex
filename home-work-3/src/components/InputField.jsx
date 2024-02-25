@@ -14,18 +14,23 @@ export default function InputField(props) {
   const [validList, updateList] = useValidation(validationList);
   return (
     <>
-      <div>
-        <label htmlFor={restProps.name}>{label}</label>{" "}
-        <input
-          {...restProps}
-          onChange={(e) => {
-            onChange(e);
-            notAdmin && updateList(e.target);
-          }}
-          list={listId}
-        />
+      <div className="form-row" style={{ gridArea: restProps.name }}>
+        <dir className="input-label">
+          <label style={{ gridArea: "label" }} htmlFor={restProps.name}>
+            {label}
+          </label>{" "}
+          <input
+            style={{ gridArea: "input" }}
+            {...restProps}
+            onChange={(e) => {
+              onChange(e);
+              notAdmin && updateList(e.target);
+            }}
+            list={listId}
+          />
+        </dir>
         {validList && notAdmin && (
-          <ul>
+          <ul style={{ gridArea: "validation" }}>
             {validList.map((elm) => (
               <li
                 key={elm.errorMessage}

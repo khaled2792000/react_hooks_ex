@@ -17,7 +17,7 @@ function Register() {
     lastName: "",
     city: "",
     roadName: "",
-    phone: "",
+    houseNumber: "",
   });
 
   function onChange(e) {
@@ -152,18 +152,18 @@ function Register() {
       name: "houseNumber",
       type: "number",
       min: 0,
-      placeholder: "Phone",
+      placeholder: "HouseNumber",
       label: "HouseNumber",
     },
   ];
   return (
     <>
-      <form action="" onSubmit={handleSubmit}>
-        <h1>Sing up</h1>
+      <form action="" onSubmit={handleSubmit} className="register-area">
+        <h1 style={{ gridArea: "title" }}>Sing up</h1>
         {inputs.map((input) => (
           <InputField key={input.id} {...input} onChange={onChange} />
         ))}
-        <button>submit</button>
+        <button style={{ gridArea: "button" }}>submit</button>
       </form>
     </>
   );

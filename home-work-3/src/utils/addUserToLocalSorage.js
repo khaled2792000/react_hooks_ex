@@ -8,3 +8,8 @@ export function add_user_to_local_storage(newUser) {
     }
     localStorage.setItem('users', JSON.stringify([...usersList, newUser]))
 }
+export function update_user(newUser_values) {
+    const usersList = JSON.parse(localStorage.getItem('users'))
+    const allTheUserWithoutTargetUser = usersList.filter(user => user.email != newUser_values.email)
+    localStorage.setItem('users', JSON.stringify([...allTheUserWithoutTargetUser, newUser_values]))
+}

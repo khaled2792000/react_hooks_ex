@@ -18,13 +18,8 @@ export default function Profile() {
       {user && (
         <>
           {user.type != "admin" && (
-            <div
-              style={{
-                display: "grid",
-                gridTemplate: "1fr 2fr ",
-              }}
-            >
-              <div>
+            <div className="profile-area">
+              <div className="profile-image" style={{ gridArea: "image" }}>
                 <img
                   src={user.userImage}
                   alt=""
@@ -37,20 +32,20 @@ export default function Profile() {
                   }}
                 />
               </div>
-              <div>
+              <div style={{ gridArea: "text" }}>
                 <h2>{user.username}</h2>
                 <h3>{user.email}</h3>
                 <h3>
                   {user.roadName}, {user.city}
                 </h3>
                 <h3>{user.birthday}</h3>
-                <dir>
-                  <button onClick={showDetailsPage}>update profile</button>
-                  <button>
-                    <a href="https://snake.io/">game</a>
-                  </button>
-                  <button onClick={logoutUser}>logout</button>
-                </dir>
+              </div>
+              <div style={{ gridArea: "button" }} className="buttons">
+                <button onClick={showDetailsPage}>update profile</button>
+                <button>
+                  <a href="https://snake.io/">game</a>
+                </button>
+                <button onClick={logoutUser}>logout</button>
               </div>
             </div>
           )}

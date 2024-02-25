@@ -1,0 +1,96 @@
+.register-area {
+    width: 1000px;
+    display: grid;
+    align-items: top;
+    grid-template-areas:
+        'title title title'
+        'username userImage city'
+        'password firstName lastName'
+        'password roadName houseNumber'
+        'confirmPassword birthday email'
+        'button button button';
+    border-top: solid 1px black;
+}
+
+.login-area {
+    max-width: 1000px;
+}
+
+form {
+    padding: 20px;
+    width: 80vw;
+}
+
+
+.form-row input {
+    padding: 10px;
+    width: 250px;
+    height: fit-content;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.profile-image>img {
+    width: 100%;
+    object-fit: fill;
+}
+
+.profile-area {
+    width: 1000px;
+    display: grid;
+    border: solid 1px black;
+    grid-template:
+        'image text'
+        'image button'
+    ;
+    gap: 10px;
+    padding: 10px;
+    align-items: center;
+}
+
+.edit-area {
+    width: 1000px;
+    display: grid;
+    justify-content: center;
+    align-items: top;
+    grid-template-areas:
+        'title title title'
+        'username userImage city'
+        'password firstName lastName'
+        'password roadName houseNumber'
+        'confirmPassword birthday  button';
+
+    border-top: solid 1px black;
+}
+
+.profile-image {
+    overflow: hidden;
+    border-radius: 100px;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: gray;
+}
+
+.buttons {
+    display: flex;
+    gap: 2px;
+}
+
+button {
+    border: none;
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    height: fit-content;
+    width: 250px;
+    padding: 10px 5px;
+    font-size: large;
+    margin: auto 0;
+    cursor: pointer;
+}

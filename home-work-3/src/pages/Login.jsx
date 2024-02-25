@@ -59,15 +59,16 @@ export default function Login() {
       label: "Password",
       validationList: passwordValidList,
       pattern:
-        user.username != "admin" &&
-        `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+        user.username != "admin"
+          ? `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`
+          : null,
       required: true,
       notAdmin: user.username != "admin",
     },
   ];
   return (
     <>
-      <form action="" onSubmit={loginUser}>
+      <form action="" onSubmit={loginUser} className="login-area">
         <h1>Login</h1>
         {inputs.map((input) => (
           <InputField key={input.id} {...input} onChange={onChange} />
