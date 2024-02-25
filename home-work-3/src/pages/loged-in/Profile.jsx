@@ -8,6 +8,10 @@ export default function Profile() {
       user && setShow((prev) => !prev);
     }
   };
+  const logoutUser = () => {
+    sessionStorage.clear();
+    setUser(null);
+  };
   return (
     <>
       {user && (
@@ -18,7 +22,17 @@ export default function Profile() {
           }}
         >
           <div>
-            <img src={user.userImage} alt="" />
+            <img
+              src={user.userImage}
+              alt=""
+              onError={() => {
+                setUser((prev) => ({
+                  ...prev,
+                  userImage:
+                    "https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortFlat&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light",
+                }));
+              }}
+            />
           </div>
           <div>
             <h2>{user.username}</h2>
@@ -29,8 +43,10 @@ export default function Profile() {
             <h3>{user.birthday}</h3>
             <dir>
               <button onClick={showDetailsPage}>update profile</button>
-              <button>game</button>
-              <button>logout</button>
+              <button>
+                <a href="https://snake.io/">game</a>
+              </button>
+              <button onClick={logoutUser}>logout</button>
             </dir>
           </div>
         </div>
