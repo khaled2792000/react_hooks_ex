@@ -2,7 +2,15 @@ import React from "react";
 import useValidation from "../hooks/useValidation";
 
 export default function InputField(props) {
-  const { listId, list, label, onChange, validationList, ...restProps } = props;
+  const {
+    listId,
+    list,
+    label,
+    onChange,
+    notAdmin = true,
+    validationList,
+    ...restProps
+  } = props;
   const [validList, updateList] = useValidation(validationList);
   return (
     <>
@@ -12,11 +20,11 @@ export default function InputField(props) {
           {...restProps}
           onChange={(e) => {
             onChange(e);
-            updateList(e.target);
+            notAdmin && updateList(e.target);
           }}
           list={listId}
         />
-        {validList && (
+        {validList && notAdmin && (
           <ul>
             {validList.map((elm) => (
               <li

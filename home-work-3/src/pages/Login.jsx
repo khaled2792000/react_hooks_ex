@@ -9,13 +9,13 @@ import { Context } from "../App";
 
 export default function Login() {
   const [loginUserObj, setLoginUserObj] = useContext(Context);
-  let user = {
+  const [user, setUser] = useState({
     username: "",
     password: "",
-  };
+  });
 
   function onChange(e) {
-    user = { ...user, [e.target.name]: e.target.value };
+    setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
   function loginUser(e) {
     e.preventDefault();
@@ -58,8 +58,11 @@ export default function Login() {
       placeholder: "Password",
       label: "Password",
       validationList: passwordValidList,
-      pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+      pattern:
+        user.username != "admin" &&
+        `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
       required: true,
+      notAdmin: user.username != "admin",
     },
   ];
   return (

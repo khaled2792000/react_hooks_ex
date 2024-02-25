@@ -1,8 +1,10 @@
 export function add_user_to_local_storage(newUser) {
     const usersList = JSON.parse(localStorage.getItem('users'))
     if (usersList && usersList.find(user => newUser.email == user.email)) {
-        localStorage.setItem('users', JSON.stringify([...usersList, newUser]))
-        return;
+        throw new Error('The user is in the system use another email')
     }
-    localStorage.setItem('users', JSON.stringify([newUser]))
+    if (usersList && usersList.find(user => newUser.username == user.username)) {
+        throw new Error('The user is in the system use another username')
+    }
+    localStorage.setItem('users', JSON.stringify([...usersList, newUser]))
 }

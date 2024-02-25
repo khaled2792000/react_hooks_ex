@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import InputField from "../components/InputField";
 import * as validList from "../utils/validationLists.js";
 import { add_user_to_local_storage } from "../utils/addUserToLocalSorage.js";
-import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 function Register() {
   const [user, setUser] = useState({
@@ -29,15 +30,24 @@ function Register() {
     const data = new FormData(e.target);
     const adjusted_data = Object.fromEntries(data.entries());
     adjusted_data.userImage = URL.createObjectURL(adjusted_data.userImage);
-    add_user_to_local_storage(adjusted_data);
-    e.target.reset();
-    let formInputs = e.target.elements;
-    for (let input of formInputs) {
-      if (input.type !== "submit") {
-        const event = new Event("change", { bubbles: true });
-        input.dispatchEvent(event);
+    try {
+      add_user_to_local_storage(adjusted_data);
+      e.target.reset();
+      let formInputs = e.target.elements;
+      for (let input of formInputs) {
+        if (input.type !== "submit") {
+          const event = new Event("change", { bubbles: true });
+          input.dispatchEvent(event);
+        }
       }
+    } catch {
+      withReactContent(Swal).fire({
+        title: "Try again",
+        text: error.message,
+        icon: "error",
+      });
     }
+
     // the load phono methods
     // setImage(URL.createObjectURL(Object.fromEntries(data.entries()).userImage));
     // console.log(
