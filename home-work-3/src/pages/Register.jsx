@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import InputField from "../components/InputField";
 import * as validList from "../utils/validationLists.js";
+import { add_user_to_local_storage } from "../utils/addUserToLocalSorage.js";
 
 function Register() {
   const [user, setUser] = useState({
@@ -16,14 +17,27 @@ function Register() {
     roadName: "",
     phone: "",
   });
+
+  // just for testing
   const [image, setImage] = useState("");
+
   function onChange(e) {
     setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
   const cites = ["גת", "באקב", "חדרה"];
+
   function handleSubmit(e) {
     e.preventDefault();
     const data = new FormData(e.target);
+    add_user_to_local_storage(Object.fromEntries(data.entries()));
+    e.target.reset();
+    let formInputs = e.target.elements;
+    for (let input of formInputs) {
+      if (input.type !== "submit") {
+        const event = new Event("change", { bubbles: true });
+        input.dispatchEvent(event);
+      }
+    }
     // the load phono methods
     // setImage(URL.createObjectURL(Object.fromEntries(data.entries()).userImage));
     // console.log(
