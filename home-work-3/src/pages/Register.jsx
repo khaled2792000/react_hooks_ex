@@ -16,10 +16,20 @@ function Register() {
     roadName: "",
     phone: "",
   });
+  const [image, setImage] = useState("");
   function onChange(e) {
     setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
   const cites = ["גת", "באקב", "חדרה"];
+  function handleSubmit(e) {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    // the load phono methods
+    // setImage(URL.createObjectURL(Object.fromEntries(data.entries()).userImage));
+    // console.log(
+    //   URL.createObjectURL(Object.fromEntries(data.entries()).userImage)
+    // );
+  }
   const inputs = [
     {
       id: 1,
@@ -64,7 +74,7 @@ function Register() {
       name: "firstName",
       type: "text",
       placeholder: "FirstName",
-      validationList: validList.firstLastNameValidList,
+      validationList: validList.firstNameValidList,
       pattern: `^[A-Za-z]+$`,
       label: "First name",
       required: true,
@@ -74,7 +84,7 @@ function Register() {
       name: "lastName",
       type: "text",
       placeholder: "LastName",
-      validationList: validList.firstLastNameValidList,
+      validationList: validList.lastNameValidList,
       pattern: `^[A-Za-z]+$`,
       label: "Last name",
       required: true,
@@ -111,29 +121,25 @@ function Register() {
       type: "text",
       placeholder: "Road Name",
       label: "Road Name",
+      validationList: validList.roadNameValidList,
     },
     {
       id: 11,
-      name: "phone",
-      type: "tel",
-      pattern: "[0-9]{3}[0-9]{3}[0-9]{4}",
+      name: "houseNumber",
+      type: "number",
+      min: 0,
       placeholder: "Phone",
-      label: "Phone",
+      label: "HouseNumber",
     },
   ];
   return (
     <>
-      <form
-        action=""
-        onSubmit={(e) => {
-          console.log("submit");
-          e.preventDefault();
-        }}
-      >
+      <form action="" onSubmit={handleSubmit}>
         {inputs.map((input) => (
           <InputField key={input.id} {...input} onChange={onChange} />
         ))}
         <button>submit</button>
+        <img src={image} alt="" />
       </form>
     </>
   );

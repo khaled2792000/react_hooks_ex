@@ -28,7 +28,14 @@ export const passwordValidList = [
 ]
 
 
-export const firstLastNameValidList = [
+export const firstNameValidList = [
+    {
+        regex: new RegExp('^[A-Za-z]+$'),
+        errorMessage:
+            "ensure that the name contains just english letters"
+    },
+]
+export const lastNameValidList = [
     {
         regex: new RegExp('^[A-Za-z]+$'),
         errorMessage:
@@ -37,7 +44,7 @@ export const firstLastNameValidList = [
 ]
 export const emailValidList = [
     {
-        regex: new RegExp('^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'),
+        regex: new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'),
         errorMessage: "It should be a valid email address!",
 
     },
@@ -48,6 +55,12 @@ export const dateValidList = [
         errorMessage: "Allowed ages between 18 and 120",
 
     },
+]
+export const roadNameValidList = [
+    {
+        regex: new RegExp('^[א-ת\s]+$'),
+        errorMessage: 'Make sure its in hebrew '
+    }
 ]
 
 export const confirmPasswordValidList = (pass) => [
