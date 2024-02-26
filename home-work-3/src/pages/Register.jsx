@@ -40,7 +40,12 @@ function Register() {
           input.dispatchEvent(event);
         }
       }
-    } catch {
+      withReactContent(Swal).fire({
+        title: "Added user successfully ",
+        text: adjusted_data.username + " added successfully to the users list",
+        icon: "success",
+      });
+    } catch (error) {
       withReactContent(Swal).fire({
         title: "Try again",
         text: error.message,

@@ -11,10 +11,15 @@ export const ProfileContext = React.createContext();
 function App() {
   const [loginUser, setLoginUser] = useState(null);
   const [show, setShow] = useState(false);
+
   useEffect(() => {
-    sessionStorage.clear();
-    const users = JSON.parse(localStorage.getItem("users"));
-    users ??
+    // sessionStorage.clear();
+    const loadData = localStorage.getItem("users");
+
+    const users =
+      loadData &&
+      JSON.parse(loadData.length == 0 ? [] : localStorage.getItem("users"));
+    (users == null || users.length == 0) &&
       localStorage.setItem(
         "users",
         JSON.stringify([

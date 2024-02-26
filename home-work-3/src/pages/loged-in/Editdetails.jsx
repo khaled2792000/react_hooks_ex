@@ -29,6 +29,7 @@ export default function Editdetails() {
         input.dispatchEvent(event);
       }
     }
+    location.reload();
   }
   const inputs = [
     {

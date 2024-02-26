@@ -1,18 +1,28 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context, ProfileContext } from "../../App";
 import SystemAdmin from "./SystemAdmin";
 export default function Profile() {
   const [user, setUser] = useContext(Context);
   const [show, setShow] = useContext(ProfileContext);
-  const userLogedIn = JSON.parse(sessionStorage.getItem("user"));
+  const [userLogedIn, setUserLogedIn] = useState(
+    JSON.parse(sessionStorage.getItem("user"))
+  );
+  useEffect(() => {
+    userLogedIn ?? setUserLogedIn(JSON.parse(sessionStorage.getItem("user")));
+  }, []);
+  useEffect(() => {
+    console.log("loged in", userLogedIn);
+    userLogedIn ?? setUserLogedIn(JSON.parse(sessionStorage.getItem("user")));
+  }, [user]);
   const showDetailsPage = () => {
     {
-      user && setShow((prev) => !prev);
+      userLogedIn && setShow((prev) => !prev);
     }
   };
   const logoutUser = () => {
     sessionStorage.clear();
     setUser(null);
+    setUserLogedIn(null);
   };
   return (
     <>
@@ -34,7 +44,7 @@ export default function Profile() {
                 <h2>{userLogedIn.username}</h2>
                 <h3>{userLogedIn.email}</h3>
                 <h3>
-                  {userLogedIn.roadName}, {user.city}
+                  {userLogedIn.roadName}, {userLogedIn.city}
                 </h3>
                 <h3>{userLogedIn.birthday}</h3>
               </div>

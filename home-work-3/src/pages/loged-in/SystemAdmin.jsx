@@ -4,15 +4,34 @@ import { Context, ProfileContext } from "../../App";
 export default function SystemAdmin() {
   const [userToEdit, setUserToEdit] = useContext(Context);
   const [show, setShow] = useContext(ProfileContext);
-
+  const loadData = localStorage.getItem("users");
+  console.log("rednder", loadData);
   const [users, setUsers] = useState(
-    JSON.parse(localStorage.getItem("users")).filter(
-      (user) => user.username != "admin"
-    )
+    loadData == ""
+      ? []
+      : JSON.parse(localStorage.getItem("users") ?? "[]").filter(
+          (user) => user.username != "admin"
+        )
   );
-  function callme() {
-    console.log("khaled");
+
+  const logoutUser = () => {
+    sessionStorage.clear();
+    location.reload();
+  };
+
+  function deleteUser(userToDelete) {
+    const remainingData = JSON.stringify(
+      users.filter((user) => user.username != userToDelete.username)
+    );
+    localStorage.setItem("users", remainingData);
+    console.log(remainingData);
+    setUsers(
+      JSON.parse(localStorage.getItem("users")).filter(
+        (user) => user.username != "admin"
+      )
+    );
   }
+
   return (
     <>
       <div>
@@ -60,13 +79,20 @@ export default function SystemAdmin() {
                     >
                       edit
                     </button>
-                    <button></button>
+                    <button
+                      onClick={() => {
+                        deleteUser(user);
+                      }}
+                    >
+                      Del
+                    </button>
                   </td>
                 </tr>
               );
             })}
           </table>
         )}
+        <button onClick={logoutUser}>logout</button>
       </div>
     </>
   );
