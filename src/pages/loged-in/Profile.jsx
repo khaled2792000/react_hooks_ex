@@ -40,7 +40,6 @@ export default function Profile() {
               style={{
                 padding: "20px",
                 borderRadius: "10px",
-                backgroundColor: "#f0f0f0",
                 width: "fit-content",
                 backgroundColor: " rgba(255, 255, 255, 0.7)",
                 boxShadow: "0 0 10px black",
