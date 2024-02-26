@@ -1,12 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Context, ProfileContext } from "../../App";
+import { Context, ProfileContext, ShowContext } from "../../App";
 import SystemAdmin from "./SystemAdmin";
 export default function Profile() {
+  const [setShowLogin] = useContext(ShowContext);
   const [user, setUser] = useContext(Context);
   const [show, setShow] = useContext(ProfileContext);
+
   const [userLogedIn, setUserLogedIn] = useState(
     JSON.parse(sessionStorage.getItem("user"))
   );
+
   useEffect(() => {
     userLogedIn ?? setUserLogedIn(JSON.parse(sessionStorage.getItem("user")));
   }, []);
@@ -23,6 +26,7 @@ export default function Profile() {
     sessionStorage.clear();
     setUser(null);
     setUserLogedIn(null);
+    setShowLogin(true);
   };
   return (
     <>

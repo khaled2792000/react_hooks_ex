@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import InputField from "../components/InputField";
 import * as validList from "../utils/validationLists.js";
 import { add_user_to_local_storage } from "../utils/addUserToLocalSorage.js";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { ShowContext } from "../App.jsx";
 
 function Register() {
+  const [setShowLogin, setShowRegister] = useContext(ShowContext);
   const [user, setUser] = useState({
     username: "",
     email: "",
@@ -19,7 +21,11 @@ function Register() {
     roadName: "",
     houseNumber: "",
   });
-
+  function goLogin() {
+    console.log("try");
+    setShowLogin(true);
+    setShowRegister(false);
+  }
   function onChange(e) {
     setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
@@ -45,6 +51,7 @@ function Register() {
         text: adjusted_data.username + " added successfully to the users list",
         icon: "success",
       });
+      goLogin();
     } catch (error) {
       withReactContent(Swal).fire({
         title: "Try again",
@@ -52,12 +59,6 @@ function Register() {
         icon: "error",
       });
     }
-
-    // the load phono methods
-    // setImage(URL.createObjectURL(Object.fromEntries(data.entries()).userImage));
-    // console.log(
-    //   URL.createObjectURL(Object.fromEntries(data.entries()).userImage)
-    // );
   }
   const inputs = [
     {
@@ -169,6 +170,18 @@ function Register() {
           <InputField key={input.id} {...input} onChange={onChange} />
         ))}
         <button style={{ gridArea: "button" }}>submit</button>
+        <p>
+          Have an account?{" "}
+          <span
+            onClick={goLogin}
+            style={{
+              color: "blue",
+              cursor: "pointer",
+            }}
+          >
+            login
+          </span>
+        </p>
       </form>
     </>
   );

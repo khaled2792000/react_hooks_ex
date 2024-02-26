@@ -1,9 +1,11 @@
 import React, { useContext, useState } from "react";
-import { Context, ProfileContext } from "../../App";
+import { Context, ProfileContext, ShowContext } from "../../App";
 
 export default function SystemAdmin() {
   const [userToEdit, setUserToEdit] = useContext(Context);
   const [show, setShow] = useContext(ProfileContext);
+  const [setShowLogin] = useContext(ShowContext);
+
   const loadData = localStorage.getItem("users");
   console.log("rednder", loadData);
   const [users, setUsers] = useState(
@@ -17,6 +19,7 @@ export default function SystemAdmin() {
   const logoutUser = () => {
     sessionStorage.clear();
     location.reload();
+    setShowLogin(true);
   };
 
   function deleteUser(userToDelete) {

@@ -8,13 +8,20 @@ import Editdetails from "./pages/loged-in/Editdetails";
 
 export const Context = React.createContext();
 export const ProfileContext = React.createContext();
+export const ShowContext = React.createContext();
 function App() {
   const [loginUser, setLoginUser] = useState(null);
   const [show, setShow] = useState(false);
+  const [showLogin, setShowLogin] = useState(true);
+  const [showRegister, setShowRegister] = useState(false);
+  const [userLogedIn, setUserLogedIn] = useState(
+    JSON.parse(sessionStorage.getItem("user"))
+  );
 
   useEffect(() => {
     // sessionStorage.clear();
     const loadData = localStorage.getItem("users");
+    userLogedIn ?? setUserLogedIn(JSON.parse(sessionStorage.getItem("user")));
 
     const users =
       loadData &&
@@ -34,12 +41,14 @@ function App() {
   return (
     <>
       <Context.Provider value={[loginUser, setLoginUser]}>
-        <Login />
-        <Register />
-        <ProfileContext.Provider value={[show, setShow]}>
-          <Profile />
-          {show && <Editdetails />}
-        </ProfileContext.Provider>
+        <ShowContext.Provider value={[setShowLogin, setShowRegister]}>
+          {showLogin && userLogedIn == null && <Login />}
+          {showRegister && <Register />}
+          <ProfileContext.Provider value={[show, setShow]}>
+            <Profile />
+            {show && <Editdetails />}
+          </ProfileContext.Provider>
+        </ShowContext.Provider>
       </Context.Provider>
     </>
   );

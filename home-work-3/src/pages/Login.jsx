@@ -4,10 +4,11 @@ import { userNameValidList, passwordValidList } from "../utils/validationLists";
 import { load_user_session } from "../utils/loadUserSesion";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { Context } from "../App";
+import { Context, ShowContext } from "../App";
 
 export default function Login() {
   const [loginUserObj, setLoginUserObj] = useContext(Context);
+  const [setShowLogin, setShowRegister] = useContext(ShowContext);
   const [user, setUser] = useState({
     username: "",
     password: "",
@@ -16,12 +17,17 @@ export default function Login() {
   function onChange(e) {
     setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
+  function gorRegister() {
+    setShowLogin(false);
+    setShowRegister(true);
+  }
   function loginUser(e) {
     e.preventDefault();
     try {
       const data = new FormData(e.target);
       const userDetails = Object.fromEntries(data.entries());
       setLoginUserObj(load_user_session(userDetails));
+      setShowLogin(false);
     } catch (error) {
       withReactContent(Swal).fire({
         title: "Try again",
@@ -74,6 +80,18 @@ export default function Login() {
         ))}
         <button>submit</button>
       </form>
+      <p>
+        Have no account?{" "}
+        <span
+          onClick={gorRegister}
+          style={{
+            color: "blue",
+            cursor: "pointer",
+          }}
+        >
+          Register
+        </span>
+      </p>
     </>
   );
 }
