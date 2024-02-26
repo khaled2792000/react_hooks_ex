@@ -5,6 +5,7 @@ import { load_user_session } from "../utils/loadUserSesion";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { Context, ShowContext } from "../App";
+import { Button, Paper } from "@mui/material";
 
 export default function Login() {
   const [loginUserObj, setLoginUserObj] = useContext(Context);
@@ -73,25 +74,47 @@ export default function Login() {
   ];
   return (
     <>
-      <form action="" onSubmit={loginUser} className="login-area">
-        <h1>Login</h1>
-        {inputs.map((input) => (
-          <InputField key={input.id} {...input} onChange={onChange} />
-        ))}
-        <button>submit</button>
-      </form>
-      <p>
-        Have no account?{" "}
-        <span
-          onClick={gorRegister}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <Paper
           style={{
-            color: "blue",
-            cursor: "pointer",
+            padding: "20px",
+            borderRadius: "10px",
+            backgroundColor: " rgba(255, 255, 255, 0.7)",
+            boxShadow: "0 0 10px black",
+            backdropFilter: "saturate(180%) blur(10px)",
+            width: "fit-content",
           }}
         >
-          Register
-        </span>
-      </p>
+          <form action="" onSubmit={loginUser} className="login-area">
+            <h1>Login</h1>
+            {inputs.map((input) => (
+              <InputField key={input.id} {...input} onChange={onChange} />
+            ))}
+            <Button type="submit" variant="contained" color="primary">
+              Submit
+            </Button>
+          </form>
+          <p>
+            Have no account?{" "}
+            <span
+              onClick={gorRegister}
+              style={{
+                color: "blue",
+                cursor: "pointer",
+              }}
+            >
+              Register
+            </span>
+          </p>
+        </Paper>
+      </div>
     </>
   );
 }

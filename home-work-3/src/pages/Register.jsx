@@ -5,6 +5,7 @@ import { add_user_to_local_storage } from "../utils/addUserToLocalSorage.js";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { ShowContext } from "../App.jsx";
+import { Paper } from "@mui/material";
 
 function Register() {
   const [setShowLogin, setShowRegister] = useContext(ShowContext);
@@ -164,25 +165,46 @@ function Register() {
   ];
   return (
     <>
-      <form action="" onSubmit={handleSubmit} className="register-area">
-        <h1 style={{ gridArea: "title" }}>Sing up</h1>
-        {inputs.map((input) => (
-          <InputField key={input.id} {...input} onChange={onChange} />
-        ))}
-        <button style={{ gridArea: "button" }}>submit</button>
-        <p>
-          Have an account?{" "}
-          <span
-            onClick={goLogin}
-            style={{
-              color: "blue",
-              cursor: "pointer",
-            }}
-          >
-            login
-          </span>
-        </p>
-      </form>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <Paper
+          style={{
+            padding: "20px",
+            borderRadius: "10px",
+            backgroundColor: "#f0f0f0",
+            width: "fit-content",
+            backgroundColor: " rgba(255, 255, 255, 0.7)",
+            boxShadow: "0 0 10px black",
+            backdropFilter: "saturate(180%) blur(10px)",
+          }}
+        >
+          <form action="" onSubmit={handleSubmit} className="register-area">
+            <h1 style={{ gridArea: "title" }}>Sing up</h1>
+            {inputs.map((input) => (
+              <InputField key={input.id} {...input} onChange={onChange} />
+            ))}
+            <button style={{ gridArea: "button" }}>submit</button>
+            <p>
+              Have an account?{" "}
+              <span
+                onClick={goLogin}
+                style={{
+                  color: "blue",
+                  cursor: "pointer",
+                }}
+              >
+                login
+              </span>
+            </p>
+          </form>
+        </Paper>
+      </div>
     </>
   );
 }

@@ -1,7 +1,6 @@
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import "../src/app.css";
-import { Route, Router, Routes } from "react-router-dom";
 import Profile from "./pages/loged-in/Profile";
 import React, { useEffect, useState } from "react";
 import Editdetails from "./pages/loged-in/Editdetails";

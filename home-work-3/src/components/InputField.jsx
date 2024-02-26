@@ -1,6 +1,6 @@
 import React from "react";
 import useValidation from "../hooks/useValidation";
-
+import { Input } from "@mui/material";
 export default function InputField(props) {
   const {
     listId,
@@ -19,7 +19,7 @@ export default function InputField(props) {
           <label style={{ gridArea: "label" }} htmlFor={restProps.name}>
             {label}
           </label>{" "}
-          <input
+          <Input
             style={{ gridArea: "input" }}
             {...restProps}
             onChange={(e) => {
