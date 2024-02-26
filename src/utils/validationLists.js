@@ -58,7 +58,7 @@ export const dateValidList = [
 ]
 export const roadNameValidList = [
     {
-        regex: new RegExp('^[א-ת\s]+$'),
+        regex: new RegExp(`[\u0590-\u05FF]+(?:\s[\u0590-\u05FF.,?!:;'"״׳()-]+)*(?:\s|$)`),
         errorMessage: 'Make sure its in hebrew '
     }
 ]
