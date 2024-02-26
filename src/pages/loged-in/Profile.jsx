@@ -78,7 +78,6 @@ export default function Profile() {
                   >
                     <CakeIcon />
                     <span>{userLogedIn.birthday}</span>
-                    <a href=""></a>
                   </h3>
                 </div>
                 <div
