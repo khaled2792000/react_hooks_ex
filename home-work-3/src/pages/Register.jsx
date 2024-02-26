@@ -195,6 +195,7 @@ function Register() {
               style={{
                 gridArea: "button",
               }}
+              type="submit"
             >
               Sign up
             </Button>

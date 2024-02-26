@@ -48,7 +48,7 @@ a {
 .profile-area {
     width: 1000px;
     display: grid;
-    border: solid 1px black;
+
     grid-template:
         'image text'
         'image button'
@@ -86,17 +86,4 @@ a {
 .buttons {
     display: flex;
     gap: 2px;
-}
-
-button {
-    border: none;
-    background-color: black;
-    color: white;
-    border-radius: 20px;
-    height: fit-content;
-    width: 250px;
-    padding: 10px 5px;
-    font-size: large;
-    margin: auto 0;
-    cursor: pointer;
 }

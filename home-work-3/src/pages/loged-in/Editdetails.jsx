@@ -30,7 +30,14 @@ export default function Editdetails() {
         input.dispatchEvent(event);
       }
     }
-    location.reload();
+    withReactContent(Swal).fire({
+      title: "Added user successfully ",
+      text: adjusted_data.username + " added successfully to the users list",
+      icon: "success",
+      preConfirm: () => {
+        location.reload();
+      },
+    });
   }
   const inputs = [
     {
@@ -161,6 +168,7 @@ export default function Editdetails() {
                 alignSelf: "center",
                 justifySelf: "center",
               }}
+              type="submit"
             >
               Update user
             </Button>

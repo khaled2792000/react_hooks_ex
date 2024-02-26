@@ -2,7 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context, ProfileContext, ShowContext } from "../../App";
 import SystemAdmin from "./SystemAdmin";
 import { Button, Paper } from "@mui/material";
-
+import EmailIcon from "@mui/icons-material/Email";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import CakeIcon from "@mui/icons-material/Cake";
 export default function Profile() {
   const [setShowLogin] = useContext(ShowContext);
   const [user, setUser] = useContext(Context);
@@ -57,14 +59,34 @@ export default function Profile() {
                   />
                 </div>
                 <div style={{ gridArea: "text" }}>
-                  <h2>{userLogedIn.username}</h2>
-                  <h3>{userLogedIn.email}</h3>
-                  <h3>
-                    {userLogedIn.roadName}, {userLogedIn.city}
+                  <h1>{userLogedIn.username}</h1>
+                  <h3
+                    style={{ display: "flex", alignContent: "center", gap: 10 }}
+                  >
+                    <EmailIcon />
+                    <span>{userLogedIn.email}</span>
                   </h3>
-                  <h3>{userLogedIn.birthday}</h3>
+                  <h3
+                    style={{ display: "flex", alignContent: "center", gap: 10 }}
+                  >
+                    <LocationOnIcon />
+                    <span>
+                      {userLogedIn.roadName}, {userLogedIn.city}
+                    </span>
+                  </h3>
+                  <h3
+                    style={{ display: "flex", alignContent: "center", gap: 10 }}
+                  >
+                    <CakeIcon />
+                    <span>{userLogedIn.birthday}</span>
+                  </h3>
                 </div>
-                <div style={{ gridArea: "button" }} className="buttons">
+                <div
+                  style={{
+                    gridArea: "button",
+                  }}
+                  className="buttons"
+                >
                   <Button
                     onClick={showDetailsPage}
                     variant="contained"
@@ -74,6 +96,7 @@ export default function Profile() {
                   </Button>
                   <Button
                     href="https://snake.io/"
+                    target="_blank"
                     variant="contained"
                     color="primary"
                   >
@@ -82,7 +105,7 @@ export default function Profile() {
                   <Button
                     onClick={logoutUser}
                     variant="contained"
-                    color="primary"
+                    color="secondary"
                   >
                     Logout
                   </Button>
