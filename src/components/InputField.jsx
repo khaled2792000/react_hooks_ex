@@ -26,6 +26,7 @@ export default function InputField(props) {
             onChange={(e) => {
               onChange(e);
               notAdmin && updateList(e.target);
+              !notAdmin && e.target.setCustomValidity("");
             }}
             list={listId}
           />

@@ -67,7 +67,7 @@ export default function Login() {
       pattern:
         user.username != "admin"
           ? `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`
-          : null,
+          : "",
       required: true,
       notAdmin: user.username != "admin",
     },
