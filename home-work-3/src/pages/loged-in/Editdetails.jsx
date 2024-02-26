@@ -3,6 +3,7 @@ import InputField from "../../components/InputField";
 import * as validList from "../../utils/validationLists.js";
 import { Context } from "../../App";
 import { update_user } from "../../utils/addUserToLocalSorage.js";
+import { Button, Paper } from "@mui/material";
 
 export default function Editdetails() {
   const [user, setUser] = useContext(Context);
@@ -136,13 +137,35 @@ export default function Editdetails() {
   return (
     <>
       {user && (
-        <form action="" onSubmit={handleSubmit} className="edit-area">
-          <h1 style={{ gridArea: "title" }}>Edit user info</h1>
-          {inputs.map((input) => (
-            <InputField key={input.id} {...input} onChange={onChange} />
-          ))}
-          <button style={{ gridArea: "button" }}>submit</button>
-        </form>
+        <Paper
+          style={{
+            padding: "20px",
+            backgroundColor: " rgba(255, 255, 255, 0.7)",
+            boxShadow: "0 0 10px black",
+            backdropFilter: "saturate(180%) blur(10px)",
+            marginTop: 20,
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <form action="" onSubmit={handleSubmit} className="edit-area">
+            <h1 style={{ gridArea: "title" }}>Edit user info</h1>
+            {inputs.map((input) => (
+              <InputField key={input.id} {...input} onChange={onChange} />
+            ))}
+            <Button
+              variant="contained"
+              color="primary"
+              style={{
+                gridArea: "button",
+                alignSelf: "center",
+                justifySelf: "center",
+              }}
+            >
+              Update user
+            </Button>
+          </form>
+        </Paper>
       )}
     </>
   );

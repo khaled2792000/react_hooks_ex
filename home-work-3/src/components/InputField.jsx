@@ -4,6 +4,7 @@ import { Input } from "@mui/material";
 export default function InputField(props) {
   const {
     listId,
+    id,
     list,
     label,
     onChange,

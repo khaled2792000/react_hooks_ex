@@ -98,7 +98,7 @@ export default function Login() {
               <InputField key={input.id} {...input} onChange={onChange} />
             ))}
             <Button type="submit" variant="contained" color="primary">
-              Submit
+              Login
             </Button>
           </form>
           <p>

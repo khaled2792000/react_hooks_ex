@@ -5,7 +5,7 @@ import { add_user_to_local_storage } from "../utils/addUserToLocalSorage.js";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { ShowContext } from "../App.jsx";
-import { Paper } from "@mui/material";
+import { Button, Paper } from "@mui/material";
 
 function Register() {
   const [setShowLogin, setShowRegister] = useContext(ShowContext);
@@ -189,7 +189,15 @@ function Register() {
             {inputs.map((input) => (
               <InputField key={input.id} {...input} onChange={onChange} />
             ))}
-            <button style={{ gridArea: "button" }}>submit</button>
+            <Button
+              variant="contained"
+              color="primary"
+              style={{
+                gridArea: "button",
+              }}
+            >
+              Sign up
+            </Button>
             <p>
               Have an account?{" "}
               <span
