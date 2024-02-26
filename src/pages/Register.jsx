@@ -158,9 +158,11 @@ function Register() {
       id: 11,
       name: "houseNumber",
       type: "number",
-      min: 0,
+      validationList: validList.JustPositevNumber,
       placeholder: "HouseNumber",
       label: "HouseNumber",
+      pattern: "^\\d*$",
+      required: true,
     },
   ];
   return (

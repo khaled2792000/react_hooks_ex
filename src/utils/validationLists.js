@@ -69,3 +69,8 @@ export const confirmPasswordValidList = (pass) => [
         errorMessage: "ensure matching the password",
     }
 ]
+
+export const JustPositevNumber = [{
+    regex: new RegExp(`^\\d*$`),
+    errorMessage: 'Just positive numbers'
+}]
