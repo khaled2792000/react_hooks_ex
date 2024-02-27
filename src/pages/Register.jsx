@@ -190,7 +190,7 @@ function Register() {
           <form action="" onSubmit={handleSubmit} className="register-area">
             <h1 style={{ gridArea: "title" }}>Sing up</h1>
             {inputs.map((input) => (
-              <InputField key={input.id} {...input} onChange={onChange} />
+              <InputField key={input.id} {...input} onChangeF={onChange} />
             ))}
             <Button
               variant="contained"

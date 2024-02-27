@@ -4,6 +4,8 @@ import * as validList from "../../utils/validationLists.js";
 import { Context } from "../../App";
 import { update_user } from "../../utils/addUserToLocalSorage.js";
 import { Button, Paper } from "@mui/material";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 export default function Editdetails() {
   const [user, setUser] = useContext(Context);
@@ -31,8 +33,8 @@ export default function Editdetails() {
       }
     }
     withReactContent(Swal).fire({
-      title: "Added user successfully ",
-      text: adjusted_data.username + " added successfully to the users list",
+      title: "Updated user successfully ",
+      text: adjusted_data.username + " Updated successfully ",
       icon: "success",
       preConfirm: () => {
         location.reload();
@@ -160,7 +162,7 @@ export default function Editdetails() {
           <form action="" onSubmit={handleSubmit} className="edit-area">
             <h1 style={{ gridArea: "title" }}>Edit user info</h1>
             {inputs.map((input) => (
-              <InputField key={input.id} {...input} onChange={onChange} />
+              <InputField key={input.id} {...input} onChangeF={onChange} />
             ))}
             <Button
               variant="contained"

@@ -24,7 +24,7 @@ export default function InputField(props) {
             style={{ gridArea: "input" }}
             {...restProps}
             onChange={(e) => {
-              console.log(notAdmin);
+              console.log(notAdmin, e.target.value);
               onChangeF && onChangeF(e);
               notAdmin && updateList(e.target);
               !notAdmin && e.target.setCustomValidity("");

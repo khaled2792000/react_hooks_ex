@@ -63,13 +63,16 @@ export default function Login() {
       type: "password",
       placeholder: "Password",
       label: "Password",
-      validationList: passwordValidList.map((elm) => ({ ...elm })),
+      validationList:
+        user.username !== "admin"
+          ? passwordValidList.map((elm) => ({ ...elm }))
+          : [],
       pattern:
         user.username != "admin"
           ? `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`
           : "",
       required: true,
-      notAdmin: user.username !== "admin",
+      notAdmin: user.username != "admin",
     },
   ];
   return (
